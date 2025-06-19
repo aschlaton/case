@@ -1,26 +1,25 @@
 {
-  "name": "case-converter",
-  "displayName": "Case Converter",
-  "description": "Intelligent case format converter with ethan_case, macron case, and smart highlighting",
-  "version": "1.0.0",
-  "publisher": "your-publisher-name",
+  "name": "superior-cases",
+  "displayName": "Superior Cases",
+  "description": "Converts from boring casing conventions to the superior upperˉcase, UPPERˉCASE, and ethan_case format",
+  "version": "1.0.2",
+  "publisher": "Cases",
   "license": "MIT",
-  "icon": "icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-username/case-converter"
+    "url": "https://github.com/aschlaton/case"
   },
   "bugs": {
-    "url": "https://github.com/your-username/case-converter/issues"
+    "url": "https://github.com/aschlaton/case/issues"
   },
-  "homepage": "https://github.com/your-username/case-converter#readme",
+  "homepage": "https://github.com/aschlaton/case#readme",
   "keywords": [
     "case",
     "converter",
     "camelCase",
     "snake_case",
     "PascalCase",
-    "macron",
+    "uppercase",
     "ethan_case",
     "naming",
     "variables"
@@ -32,7 +31,26 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onCommand:caseConverter.convert_selection",
+    "onCommand:caseConverter.convert_selection_withScope",
+    "onCommand:caseConverter.convert_document",
+    "onCommand:caseConverter.toggleDecorations",
+    "onCommand:caseConverter.convert_file",
+    "onCommand:caseConverter.convertFolder",
+    "onCommand:caseConverter.setFavoriteCase",
+    "onLanguage:javascript",
+    "onLanguage:typescript",
+    "onLanguage:python",
+    "onLanguage:java",
+    "onLanguage:csharp",
+    "onLanguage:cpp",
+    "onLanguage:c",
+    "onLanguage:php",
+    "onLanguage:ruby",
+    "onLanguage:go",
+    "onLanguage:rust",
+    "onLanguage:swift",
+    "onLanguage:kotlin"
   ],
   "main": "./out/extension.js",
   "contributes": {

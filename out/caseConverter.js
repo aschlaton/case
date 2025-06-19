@@ -2,14 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.caseConverter = void 0;
 const externalPatterns_1 = require("./constants/externalPatterns");
+const casePatterns_1 = require("./constants/casePatterns");
+const definitionPatterns_1 = require("./constants/definitionPatterns");
 class caseConverter {
     constructor() {
-        // Regex patterns for different case styles
-        this.camelCase_pattern = /\b[a-z][a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*\b/g;
-        this.pascalCase_pattern = /\b[A-Z][a-zA-Z0-9]*[A-Z][a-zA-Z0-9]*\b/g;
-        this.snakeCase_pattern = /\b[a-z][a-z0-9]*(_[a-z0-9]+)+\b/g;
-        this.screamingSnakeCase_pattern = /\b[A-Z][A-Z0-9]*(_[A-Z0-9]+)+\b/g;
-        // Store variables defined within the current conversion scope
+        this.camelCase_pattern = casePatterns_1.camelCase_pattern;
+        this.pascalCase_pattern = casePatterns_1.pascalCase_pattern;
+        this.snakeCase_pattern = casePatterns_1.snakeCase_pattern;
+        this.screamingSnakeCase_pattern = casePatterns_1.screamingSnakeCase_pattern;
         this.scope_variables = new Set();
         this.conversion_scope_path = '';
         this.text_scopeContent = '';
@@ -21,7 +21,6 @@ class caseConverter {
         this.conversion_scope_path = folderPath;
         this.text_scopeContent = '';
         this.scope_variables.clear();
-        // Analyze all files in scope to find defined variables
         for (const file_path of file_paths) {
             this.analyzeFileForVariables(file_path);
         }
@@ -33,7 +32,6 @@ class caseConverter {
         this.conversion_scope_path = '';
         this.text_scopeContent = selected_text;
         this.scope_variables.clear();
-        // Analyze the selected text to find defined variables
         const variables = this.extract_defined_variables(selected_text);
         variables.forEach(variable => {
             this.scope_variables.add(variable);
@@ -60,7 +58,6 @@ class caseConverter {
             });
         }
         catch (error) {
-            // Silently ignore files that can't be read
         }
     }
     /**
@@ -68,34 +65,12 @@ class caseConverter {
      */
     extract_defined_variables(content) {
         const variables = new Set();
-        // Patterns for variable definitions
-        const definitionPatterns = [
-            // Variable declarations
-            /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g,
-            /(?:const|let|var)\s+\{\s*([^}]*)\s*\}/g,
-            // Function declarations
-            /function\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g,
-            /(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=\s*(?:function|\(.*\)\s*=>)/g,
-            // Class declarations
-            /class\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g,
-            // Interface/type declarations
-            /(?:interface|type|enum)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g,
-            // Method definitions
-            /(?:public|private|protected|static)?\s*([a-zA-Z_$][a-zA-Z0-9_$]*)\s*\(/g,
-            // Object property definitions
-            /([a-zA-Z_$][a-zA-Z0-9_$]*)\s*:/g,
-            // Export declarations
-            /export\s+(?:const|let|var|function|class|interface|type|enum)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/g,
-            // Function parameters
-            /\(([^)]*)\)/g
-        ];
-        definitionPatterns.forEach(pattern => {
+        definitionPatterns_1.definitionPatterns.forEach(pattern => {
             let match;
             while ((match = pattern.exec(content)) !== null) {
                 const captured = match[1];
                 if (captured) {
                     if (captured.includes(',')) {
-                        // Handle destructuring or parameter lists
                         const parts = captured.split(',');
                         parts.forEach(part => {
                             const cleanPart = part.trim().split(/[:\s=]/)[0].trim();
@@ -117,30 +92,24 @@ class caseConverter {
      * Check if a string is a valid identifier and not an external dependency
      */
     is_valid_identifier(identifier) {
-        // Must be valid identifier format
         if (!/^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(identifier)) {
             return false;
         }
-        // Must not be external dependency
         return !this.isExternalDependency(identifier);
     }
     /**
      * Check if an identifier should be excluded from conversion because it's external
      */
     should_excludeFromConversion(identifier) {
-        // Always exclude external dependencies
         if (this.isExternalDependency(identifier)) {
             return true;
         }
-        // If no conversion scope is set, don't exclude anything (single file mode)
         if (!this.conversion_scope_path && !this.text_scopeContent) {
             return false;
         }
-        // If variable is defined within scope, allow conversion
         if (this.scope_variables.has(identifier)) {
             return false;
         }
-        // If variable is not in scope but not external, exclude it (could be from other files)
         return true;
     }
     /**
