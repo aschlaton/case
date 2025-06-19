@@ -1,0 +1,371 @@
+{
+  "name": "case-converter",
+  "displayName": "Case Converter",
+  "description": "Intelligent case format converter with ethan_case, macron case, and smart highlighting",
+  "version": "1.0.0",
+  "publisher": "your-publisher-name",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/case-converter"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/case-converter/issues"
+  },
+  "homepage": "https://github.com/your-username/case-converter#readme",
+  "keywords": [
+    "case",
+    "converter",
+    "camelCase",
+    "snake_case",
+    "PascalCase",
+    "macron",
+    "ethan_case",
+    "naming",
+    "variables"
+  ],
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "caseConverter.convert_selection",
+        "title": "Convert Selection to upperˉcase"
+      },
+      {
+        "command": "caseConverter.convert_selection_withScope",
+        "title": "Convert Selection with Scope Awareness"
+      },
+      {
+        "command": "caseConverter.convert_document",
+        "title": "Convert Document to upperˉcase"
+      },
+      {
+        "command": "caseConverter.toggleDecorations",
+        "title": "Toggle upperˉcase Highlighting"
+      },
+      {
+        "command": "caseConverter.toggleCamelCase",
+        "title": "Toggle camelCase Conversion"
+      },
+      {
+        "command": "caseConverter.togglePascalCase",
+        "title": "Toggle PascalCase Conversion"
+      },
+      {
+        "command": "caseConverter.toggleSnakeCase",
+        "title": "Toggle snake_case Conversion"
+      },
+      {
+        "command": "caseConverter.toggleScreamingSnakeCase",
+        "title": "Toggle SCREAMING_SNAKE_CASE Conversion"
+      },
+      {
+        "command": "caseConverter.toggleOutputFormat",
+        "title": "Toggle upperˉcase/UPPERˉCASE Format"
+      },
+      {
+        "command": "caseConverter.convert_file",
+        "title": "Convert Current File to New Case"
+      },
+      {
+        "command": "caseConverter.convertFolder",
+        "title": "Convert Folder to New Case"
+      },
+      {
+        "command": "caseConverter.toggleShiftState",
+        "title": "Toggle Shift State for Decorations"
+      },
+      {
+        "command": "caseConverter.setShiftPressed",
+        "title": "Show Decorations (Shift Pressed)"
+      },
+      {
+        "command": "caseConverter.setShiftReleased",
+        "title": "Hide Decorations (Shift Released)"
+      },
+      {
+        "command": "caseConverter.convertFileToLowercase",
+        "title": "Convert to upperˉcase"
+      },
+      {
+        "command": "caseConverter.convertFileToUppercase",
+        "title": "Convert to UPPERˉCASE"
+      },
+      {
+        "command": "caseConverter.convertFileToEthanCase",
+        "title": "Convert to ethan_case"
+      },
+      {
+        "command": "caseConverter.convertFolderToLowercase",
+        "title": "Convert to upperˉcase"
+      },
+      {
+        "command": "caseConverter.convertFolderToUppercase",
+        "title": "Convert to UPPERˉCASE"
+      },
+      {
+        "command": "caseConverter.convertFolderToEthanCase",
+        "title": "Convert to ethan_case"
+      },
+      {
+        "command": "caseConverter.convertSelectionToFavorite",
+        "title": "Convert Selection to Favorite Case"
+      },
+      {
+        "command": "caseConverter.setFavoriteCase",
+        "title": "Set Favorite Case Format"
+      },
+      {
+        "command": "caseConverter.showDecorationsTemporarily",
+        "title": "Show Case Decorations (5 seconds)"
+      },
+      {
+        "command": "caseConverter.toggleDecorations",
+        "title": "Toggle Case Decorations"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "caseConverter.convertSelectionToFavorite",
+        "key": "shift+alt+c",
+        "when": "editorHasSelection"
+      },
+      {
+        "command": "caseConverter.showDecorationsTemporarily",
+        "key": "shift+alt+d",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "caseConverter.toggleDecorations",
+        "key": "shift+alt+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "caseConverter.setFavoriteCase",
+        "key": "shift+alt+f"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "caseConverter.convert_selection",
+          "when": "editorHasSelection",
+          "group": "1_modification"
+        },
+        {
+          "command": "caseConverter.convert_selection_withScope",
+          "when": "editorHasSelection",
+          "group": "1_modification"
+        }
+      ],
+      "command-palette": [
+        {
+          "command": "caseConverter.convert_selection",
+          "title": "Convert Selection to upperˉcase"
+        },
+        {
+          "command": "caseConverter.convert_selection_withScope",
+          "title": "Convert Selection with Scope Awareness"
+        },
+        {
+          "command": "caseConverter.convert_document",
+          "title": "Convert Document to upperˉcase"
+        },
+        {
+          "command": "caseConverter.toggleDecorations",
+          "title": "Toggle upperˉcase Highlighting"
+        },
+        {
+          "command": "caseConverter.toggleCamelCase",
+          "title": "Toggle camelCase Conversion"
+        },
+        {
+          "command": "caseConverter.togglePascalCase",
+          "title": "Toggle PascalCase Conversion"
+        },
+        {
+          "command": "caseConverter.toggleSnakeCase",
+          "title": "Toggle snake_case Conversion"
+        },
+        {
+          "command": "caseConverter.toggleScreamingSnakeCase",
+          "title": "Toggle SCREAMING_SNAKE_CASE Conversion"
+        },
+        {
+          "command": "caseConverter.toggleOutputFormat",
+          "title": "Toggle upperˉcase/UPPERˉCASE Format"
+        },
+        {
+          "command": "caseConverter.convert_file",
+          "title": "Convert Current File to New Case"
+        },
+        {
+          "command": "caseConverter.convertFolder",
+          "title": "Convert Folder to New Case"
+        },
+        {
+          "command": "caseConverter.toggleShiftState",
+          "title": "Toggle Shift State for Decorations"
+        },
+        {
+          "command": "caseConverter.setShiftPressed",
+          "title": "Show Decorations (Shift Pressed)"
+        },
+        {
+          "command": "caseConverter.setShiftReleased",
+          "title": "Hide Decorations (Shift Released)"
+        },
+        {
+          "command": "caseConverter.convertSelectionToFavorite",
+          "title": "Convert Selection to Favorite Case"
+        },
+        {
+          "command": "caseConverter.setFavoriteCase",
+          "title": "Set Favorite Case Format"
+        },
+        {
+          "command": "caseConverter.showDecorationsTemporarily",
+          "title": "Show Case Decorations (5 seconds)"
+        },
+        {
+          "command": "caseConverter.toggleDecorations",
+          "title": "Toggle Case Decorations"
+        }
+      ],
+      "explorer/context": [
+        {
+          "submenu": "caseConverter.fileConversion",
+          "when": "resourceExtname =~ /\\.(js|ts|jsx|tsx|py|java|c|cpp|cs|php|rb|go|rs|kt|swift|scala|dart|vue|svelte)$/",
+          "group": "7_modification"
+        },
+        {
+          "submenu": "caseConverter.folderConversion",
+          "when": "resourceScheme == file && explorerResourceIsFolder",
+          "group": "7_modification"
+        }
+      ],
+      "caseConverter.fileConversion": [
+        {
+          "command": "caseConverter.convertFileToLowercase",
+          "group": "1_conversion"
+        },
+        {
+          "command": "caseConverter.convertFileToUppercase",
+          "group": "1_conversion"
+        },
+        {
+          "command": "caseConverter.convertFileToEthanCase",
+          "group": "1_conversion"
+        }
+      ],
+      "caseConverter.folderConversion": [
+        {
+          "command": "caseConverter.convertFolderToLowercase",
+          "group": "1_conversion"
+        },
+        {
+          "command": "caseConverter.convertFolderToUppercase",
+          "group": "1_conversion"
+        },
+        {
+          "command": "caseConverter.convertFolderToEthanCase",
+          "group": "1_conversion"
+        }
+      ]
+    },
+    "submenus": [
+      {
+        "id": "caseConverter.fileConversion",
+        "label": "Convert File to New Case"
+      },
+      {
+        "id": "caseConverter.folderConversion",
+        "label": "Convert Folder to New Case"
+      }
+    ],
+    "configuration": {
+      "title": "Case Converter",
+      "properties": {
+        "caseConverter.convert_camelCase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Convert camelCase to camelˉcase"
+        },
+        "caseConverter.convertPascalCase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Convert PascalCase to pascalˉcase"
+        },
+        "caseConverter.convert_snakeCase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Convert snake_case to snakeˉcase"
+        },
+        "caseConverter.convert_screamingSnakeCase": {
+          "type": "boolean",
+          "default": true,
+          "description": "Convert SCREAMING_SNAKE_CASE to screamingˉsnakeˉcase"
+        },
+        "caseConverter.enableHighlighting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable visual highlighting of convertible cases"
+        },
+        "caseConverter.output_format": {
+          "type": "string",
+          "enum": ["upperˉcase", "UPPERˉCASE", "ethan_case"],
+          "default": "upperˉcase",
+          "description": "Output format: upperˉcase (lowercase), UPPERˉCASE (uppercase), or ethan_case (algorithmic snake_case/camelCase)"
+        },
+        "caseConverter.supportedFileTypes": {
+          "type": "array",
+          "default": ["js", "ts", "jsx", "tsx", "py", "java", "c", "cpp", "cs", "php", "rb", "go", "rs", "kt", "swift", "scala", "dart", "vue", "svelte"],
+          "description": "File extensions to process when converting folders"
+        },
+        "caseConverter.excludePatterns": {
+          "type": "array",
+          "default": ["node_modules", ".git", "dist", "build", ".vscode", "coverage"],
+          "description": "Folder patterns to exclude from bulk conversion"
+        },
+        "caseConverter.favoriteCase": {
+          "type": "string",
+          "enum": ["upperˉcase", "UPPERˉCASE", "ethan_case"],
+          "default": "upperˉcase",
+          "description": "Favorite case format for quick conversion (used with shift-click)"
+        },
+        "caseConverter.enableAutoSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable auto-suggestions as you type convertible cases (like Cursor)"
+        },
+        "caseConverter.autoSuggestionMinLength": {
+          "type": "number",
+          "default": 3,
+          "minimum": 2,
+          "maximum": 10,
+          "description": "Minimum word length to trigger auto-suggestions"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  }
+} 
